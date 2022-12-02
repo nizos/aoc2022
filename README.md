@@ -41,13 +41,13 @@ The following scripts are provided for convention.
 ### Build & Run
 
 ```bash
-scripts/run.sh
+./scripts/run.sh
 ```
 
 ### Build & Test
 
 ```bash
-scripts/test.sh
+./scripts/test.sh
 ```
 
 ## Additional commands

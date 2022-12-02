@@ -2,13 +2,13 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name and version
-project(ExampleProject VERSION 1.0)
+project(AOCProject VERSION 1.0)
 
 # enable testing frameworks (after project() declaration)
 enable_testing()
 
 # specify the tests to be performed (and output)
-add_test(NAME ExampeTest
+add_test(NAME AOCTest
         COMMAND runTests --gtest_output=xml:report.xml)
 
 # include and link source folder
@@ -19,11 +19,10 @@ link_directories(src)
 add_executable(main src/main.cpp)
 
 # add add library
-add_library(Example src/Example.cpp)
-
+add_library(Solution src/Solution.cpp)
 
 # link the library
-target_link_libraries(main Example)
+target_link_libraries(main Solution)
 
 # locate GTest
 find_package(GTest REQUIRED)

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "example_tests.cpp"
+#include "solution_tests.cpp"
 
 int main(int argc, char **argv)
 {
