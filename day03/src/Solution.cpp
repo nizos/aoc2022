@@ -32,8 +32,8 @@ void sortCompartment(std::string* compartment)
  * @param last2 the end of second element.
  * @return the first encountered character common in both.
  */
-template<class It>
-char getCommonItem(It first1, It last1, It first2, It last2)
+template<class InIt>
+char getCommonItem(InIt first1, InIt last1, InIt first2, InIt last2)
 {
     char match;
     while (first1 != last1 && first2 != last2) {
@@ -48,6 +48,30 @@ char getCommonItem(It first1, It last1, It first2, It last2)
         }
     }
     return match;
+}
+
+/**
+ * Returns the set of characters common in two sorted strings.
+ *
+ * @param first1 the beginning of the first element.
+ * @param last1 the end of the first element.
+ * @param first2 the beginning of second element.
+ * @param last2 the end of second element.
+ * @return the set of encountered character common in both as a string.
+ */
+template<class InIt, class OutIt>
+void getCommonItems(InIt first1, InIt last1, InIt first2, InIt last2, OutIt intersect)
+{
+    while (first1 != last1 && first2 != last2) {
+        if (*first1 < *first2) {
+            ++first1;
+        } else  {
+            if (!(*first2 < *first1)) {
+                *intersect++ = *first1;
+            }
+            ++first2;
+        }
+    }
 }
 
 /**
@@ -67,7 +91,7 @@ int getItemPriority(char item)
  * @param rucksack a string of characters.
  * @return the integer representing the priority of the found item.
  */
-int getRucksackTotal(const std::string* rucksack)
+int getRucksackItemPriority(const std::string* rucksack)
 {
     // Split rucksack into compartments
     std::pair<std::string, std::string> c = getCompartments(rucksack);
@@ -89,14 +113,62 @@ int getRucksackTotal(const std::string* rucksack)
  * @param data a new-line delimited string of rucksacks.
  * @return the sum of all priorities of found items.
  */
-int getTotal(const std::string* data)
+int getTotalItemPriorities(const std::string* data)
 {
     int total = 0;
     std::string line;
     std::istringstream stream(*data);
     while (std::getline(stream, line))
     {
-        total += getRucksackTotal(&line);
+        total += getRucksackItemPriority(&line);
+    }
+    return total;
+}
+
+/**
+ * Returns the group badge priority in a group of three rucksacks.
+ *
+ * @param data a new-line delimited string of rucksacks.
+ * @return the group badge priority.
+ */
+int getGroupBadgePriority(std::string* a, std::string* b, std::string* c)
+{
+    // Sort the three rucksacks
+    sortCompartment(a);
+    sortCompartment(b);
+    sortCompartment(c);
+
+    // Find the items in common
+    std::string common, result;
+    getCommonItems(begin(*a), end(*a), begin(*b), end(*b), std::back_inserter(common));
+    getCommonItems(begin(*c), end(*c), begin(common), end(common), std::back_inserter(result));
+
+    // Return the priority of the first common item
+    return getItemPriority(result[0]);
+}
+
+/**
+ * Returns the sum of all badge priorities for provided rucksacks.
+ *
+ * @param data a new-line delimited string of rucksacks.
+ * @return the sum of all group badge priorities.
+ */
+int getTotalGroupBadgePriorities(const std::string* data)
+{
+    int total = 0;
+    int current = 0;
+    std::array<std::string, 3> sack;
+
+    std::string line;
+    std::istringstream stream(*data);
+    while (std::getline(stream, line))
+    {
+        sack[current++] = line;
+        if (current % 3 == 0)
+        {
+            total += getGroupBadgePriority(&sack[0], &sack[1], &sack[2]);
+            current = 0;
+        }
     }
     return total;
 }

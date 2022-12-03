@@ -79,47 +79,64 @@ TEST(day03, getItemPriorityCapitalZ)
     ASSERT_EQ(getItemPriority('Z'), 52);
 }
 
+TEST(day03, getCommonItem)
+{
+    std::string a = "abcdefghijklmn";
+    std::string b = "mnopqrstuvwxyz";
+    char item = getCommonItem(begin(a), end(a), begin(b), end(b));
+    ASSERT_EQ(item, 'm');
+}
 
-TEST(day03, getRucksackTotalOne)
+TEST(day03, getCommonItems)
+{
+    std::string a = "abcdefghijklmn";
+    std::string b = "mnopqrstuvwxyz";
+    std::string common;
+    getCommonItems(begin(a), end(a), begin(b), end(b), std::back_inserter(common));
+    ASSERT_EQ(common, "mn");
+}
+
+
+TEST(day03, getRucksackItemPriorityOne)
 {
     std::string rucksack = "vJrwpWtwJgWrhcsFMMfFFhFp";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 16);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 16);
 }
 
-TEST(day03, getRucksackTotalTwo)
+TEST(day03, getRucksackItemPriorityTwo)
 {
     std::string rucksack = "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 38);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 38);
 }
 
-TEST(day03, getRucksackTotalThree)
+TEST(day03, getRucksackItemPriorityThree)
 {
     std::string rucksack = "PmmdzqPrVvPwwTWBwg";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 42);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 42);
 }
 
 
-TEST(day03, getRucksackTotalFour)
+TEST(day03, getRucksackItemPriorityFour)
 {
     std::string rucksack = "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 22);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 22);
 }
 
 
-TEST(day03, getRucksackTotalFive)
+TEST(day03, getRucksackItemPriorityFive)
 {
     std::string rucksack = "ttgJtRGJQctTZtZT";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 20);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 20);
 }
 
 
-TEST(day03, getRucksackTotalSix)
+TEST(day03, getRucksackItemPrioritySix)
 {
     std::string rucksack = "CrZsJsPPZsGzwwsLwLmpwMDw";
-    ASSERT_EQ(getRucksackTotal(&rucksack), 19);
+    ASSERT_EQ(getRucksackItemPriority(&rucksack), 19);
 }
 
-TEST(day03, getTotal)
+TEST(day03, getTotalItemPriorities)
 {
     std::string data = "vJrwpWtwJgWrhcsFMMfFFhFp\n";
     data += "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\n";
@@ -127,5 +144,33 @@ TEST(day03, getTotal)
     data += "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\n";
     data += "ttgJtRGJQctTZtZT\n";
     data += "CrZsJsPPZsGzwwsLwLmpwMDw";
-    ASSERT_EQ(getTotal(&data), 157);
+    ASSERT_EQ(getTotalItemPriorities(&data), 157);
+}
+
+TEST(day03, getGroupBadgePriorityOne)
+{
+    std::string a = "vJrwpWtwJgWrhcsFMMfFFhFp";
+    std::string b = "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL";
+    std::string c = "PmmdzqPrVvPwwTWBwg";
+    ASSERT_EQ(getGroupBadgePriority(&a, &b, &c), 18);
+}
+
+TEST(day03, getGroupBadgePriorityTwo)
+{
+    std::string a = "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn";
+    std::string b = "ttgJtRGJQctTZtZT";
+    std::string c = "CrZsJsPPZsGzwwsLwLmpwMDw";
+    ASSERT_EQ(getGroupBadgePriority(&a, &b, &c), 52);
+}
+
+
+TEST(day03, getTotalGroupBadgePriorities)
+{
+    std::string data = "vJrwpWtwJgWrhcsFMMfFFhFp\n";
+    data += "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\n";
+    data += "PmmdzqPrVvPwwTWBwg\n";
+    data += "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\n";
+    data += "ttgJtRGJQctTZtZT\n";
+    data += "CrZsJsPPZsGzwwsLwLmpwMDw";
+    ASSERT_EQ(getTotalGroupBadgePriorities(&data), 70);
 }

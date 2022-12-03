@@ -10,7 +10,11 @@ int main()
 
     // Solution to part 01
     std::cout << "Solution to part 01" << std::endl;
-    std::cout << "Total: " << getTotal(&data) << std::endl << std::endl;
+    std::cout << "Items total: " << getTotalItemPriorities(&data) << std::endl << std::endl;
+
+    // Solution to part 02
+    std::cout << "Solution to part 02" << std::endl;
+    std::cout << "Badges total: " << getTotalGroupBadgePriorities(&data) << std::endl;
 
     return 0;
 }
