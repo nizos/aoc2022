@@ -2,31 +2,30 @@
 
 int getRoundScore(char a, char b)
 {
-    int score = 0;
-    int aVal = a-64; // Opponent
-    int bVal = b-87; // Player
-    int result = ((aVal - bVal) % 3 + 3) % 3;
-    switch (result)
-    {
-        case 0:
-            score = 3 + bVal;
-            break;
-        case 1:
-            score = bVal;
-            break;
-        case 2:
-            score = 6 + bVal;
-            break;
-    }
-    return score;
+    // Shapes: 1 = Rock, 2 = Paper, 3 = Scissors
+    int aShape = a-64; // A -> 1, B -> 2, C -> 3
+    int bShape = b-87; // X -> 1, Y -> 2, Z -> 3
+
+    // Round result: 0 = Draw, 1 = Lose, 2 = Win
+    int result = ((aShape - bShape) % 3 + 3) % 3;
+
+    // Round score: Draw = 3 + Shape, Lose = 0 + Shape, Win = 6 + Shape
+    return (3 - result + 1) % 3 * 3 + bShape;
 };
 
 int getRoundScoreAlt(char a, char b)
 {
-    int aVal = a-64; // Opponent
-    int bVal = b-87; // Strategy
-    int result = (aVal + bVal) % 3;
-    return getRoundScore(a, 'X'+result);
+    // Shape: 1 = Rock, 2 = Paper, 3 = Scissors
+    int shape = a-64; // A -> 1, B -> 2, C -> 3
+
+    // Strategy: 1 = Lose, 2 = Draw, 3 = Win
+    int strategy = b-87; // X -> 1, Y -> 2, Z -> 3
+
+    // Pick: X = Rock, Y = Paper, Z = Scissors
+    int pick = 'X'+((shape + strategy) % 3);
+
+    // Round score using picked shape
+    return getRoundScore(a, pick);
 };
 
 int getGameScore(std::string data)
