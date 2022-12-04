@@ -27,7 +27,7 @@ std::pair<std::pair<int, int>, std::pair<int, int>> getRangePairs(const std::str
  * Returns whether any overlap is found between two provided ranges.
  *
  * @param a the first of the two ranges. ex: {2, 4}.
- * @param a the second of the two ranges. ex: {3, 6}.
+ * @param b the second of the two ranges. ex: {3, 6}.
  * @return a boolean value of whether any overlap was found or not.
  */
 bool arePartiallyOverlapped(const std::pair<int, int> a, const std::pair<int, int> b)
@@ -39,7 +39,7 @@ bool arePartiallyOverlapped(const std::pair<int, int> a, const std::pair<int, in
  * Returns whether two provided ranges fully overlap or not.
  *
  * @param a the first of the two ranges. ex: {2, 4}.
- * @param a the second of the two ranges. ex: {3, 6}.
+ * @param b the second of the two ranges. ex: {3, 6}.
  * @return a boolean value of whether a full overlap was found or not.
  */
 bool areFullyOverlapped(const std::pair<int, int> a, const std::pair<int, int> b)

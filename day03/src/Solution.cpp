@@ -57,7 +57,7 @@ char getCommonItem(InIt first1, InIt last1, InIt first2, InIt last2)
  * @param last1 the end of the first element.
  * @param first2 the beginning of second element.
  * @param last2 the end of second element.
- * @return the set of encountered character common in both as a string.
+ * @param intersect the element which to store the intersect in.
  */
 template<class InIt, class OutIt>
 void getCommonItems(InIt first1, InIt last1, InIt first2, InIt last2, OutIt intersect)
